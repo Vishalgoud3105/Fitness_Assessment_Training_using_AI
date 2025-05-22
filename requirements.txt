@@ -1,7 +1,17 @@
-opencv-python
-mediapipe
-numpy
-pandas
-time
-openpyxl
-cv2
+# Streamlit web framework
+streamlit>=1.25.0
+
+# Core ML/CV libraries
+opencv-python>=4.7.0.72
+mediapipe>=0.10.0
+numpy>=1.24.0
+
+# Data handling
+pandas>=1.5.3
+openpyxl>=3.1.0
+
+# Email functionality (smtplib is built-in, just for clarity)
+email
+
+# Optional: For type hints and support in modern Python
+typing-extensions>=4.5.0
