@@ -1,6 +1,6 @@
-streamlit
-opencv-python
-mediapipe
-numpy
-pandas
-openpyxl
+streamlit==1.32.2
+opencv-python-headless==4.7.0.72
+mediapipe==0.10.0
+numpy==1.24.4
+pandas==1.5.3
+openpyxl==3.1.2
