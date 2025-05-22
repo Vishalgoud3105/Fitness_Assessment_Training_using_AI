@@ -1,11 +1,13 @@
+# components/email_handler.py — Enhanced Email Personalization
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from templates.email_types import email_templates
 
-def send_custom_email(name, recipient_email, tone, prompt_key):
-    sender_email = "your_email@example.com"
-    sender_password = "your_app_password"  # Use app password, not your real Gmail password
+def send_custom_email(name, recipient_email, tone, prompt_key, performance, ideal):
+    sender_email = "tony17stark07@gmail.com"
+    sender_password = "fpqv delg ppwn impl"
 
     subject = f"🏋️ Fitness Report for {name}"
     message = MIMEMultipart("alternative")
@@ -13,10 +15,20 @@ def send_custom_email(name, recipient_email, tone, prompt_key):
     message["From"] = sender_email
     message["To"] = recipient_email
 
-    # Get the selected email template
-    html_content = email_templates[tone][prompt_key].format(Name=name)
-    part = MIMEText(html_content, "html")
-    message.attach(part)
+    # Performance summary logic
+    delta = performance - ideal
+    if delta > 0:
+        extra = f"🔥 You performed {abs(delta):.1f} above the ideal!"
+    elif delta < 0:
+        extra = f"✨ You're just {abs(delta):.1f} away from the ideal. Keep going!"
+    else:
+        extra = f"🎯 You hit the ideal target exactly!"
+
+    # Build email content
+    template = email_templates[tone][prompt_key]
+    html_content = template.format(Name=name, Performance=f"{performance:.1f}", Encouragement=extra)
+
+    message.attach(MIMEText(html_content, "html"))
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
